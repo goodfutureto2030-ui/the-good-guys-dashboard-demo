@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import { METRICS, TOP, BOT, sumGoals, fmt } from "../lib/stats";
 import GoalEdit from "./GoalEdit";
-import photoL from "../assets/Goalimage.png";   // swap the two if they land on the wrong sides
-import photoR from "../assets/Goalimage2.png";
+import photoL from "../assets/GoalImage.png";   // swap the two if they land on the wrong sides
+import photoR from "../assets/GoalImage2.png";
 
 const yearOf = (r) => String(r.PeriodStart).slice(0, 4);
 
