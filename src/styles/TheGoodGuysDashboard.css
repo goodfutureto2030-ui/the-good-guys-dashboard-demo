@@ -1,0 +1,330 @@
+/* Global page reset and shared theme variables. */
+html,body{margin:0}
+:root{--g:#2D6438;--gd:#2f5231;--gold:#d4b46e;--cream:#f5ece0;--ink:#1a2b1c;--mut:#6b7280;--line:#e5e7eb;--red:#dc2626}
+
+/* Base dashboard typography, sizing, and button styles. */
+.gg *{box-sizing:border-box}.gg{font-family:Inter,system-ui,sans-serif;color:var(--ink);min-height:100vh;background:#fff}
+.gg button{font-family:inherit;cursor:pointer}
+
+/* Hover/focus tooltip behavior. */
+[data-tip]{position:relative}
+[data-tip]:hover,[data-tip]:focus-visible{z-index:70}   /* stops neighbouring cards covering it */
+
+[data-tip]::after{
+  content:attr(data-tip);
+  position:absolute;
+  bottom:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:min(240px,80vw);      /* wraps long text instead of overflowing */
+  white-space:normal;
+  text-align:left;
+  background:#1f2d20;color:#fff;
+  font-size:12px;font-weight:500;line-height:1.4;
+  padding:6px 10px;border-radius:8px;
+  z-index:60;pointer-events:none;
+  opacity:0;visibility:hidden;transition:opacity .15s;
+}
+[data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;visibility:visible}
+
+/* Shared button variants. */
+.btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 18px;font-weight:600;font-size:14px;transition:.15s}
+.btn:hover{background:#f3f4f6;transform:translateY(-1px)}
+.btn.pri{background:var(--g);border-color:var(--g);color:#fff}.btn.pri:hover{background:var(--gd)}
+
+/* left-most item: tooltip grows to the right */
+.tip-l::after{left:0;right:auto;transform:none}
+/* right-most item: tooltip grows to the left */
+.tip-r::after{left:auto;right:0;transform:none}
+
+/* login */
+.login{display:grid;grid-template-columns:2fr 1.3fr;min-height:100vh}
+
+/* Left login image collage and gradient fade. */
+.photos{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;position:relative;overflow:none}
+.photos img{width:100%;height:100%;object-fit:cover;display:inline-block;transition:.15s}.photos img:hover{filter:brightness(1.1)}
+.photos:after{content:"";position:absolute;inset:50% 0 0;background:linear-gradient(transparent,#fff 95%);pointer-events:none}
+
+/* Right login panel and sign-in card. */
+.lpanel{background:var(--g);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:90px;padding:24px}
+.brand{display:flex;align-items:center;gap:20px;color:#fff;font-weight:800;font-size:30px;line-height:1.15}
+.brand .bar{width:2px;height:90px;background:#fff}
+.lcard{background:#edf1ec;border-radius:28px;width:min(420px,100%);padding:0 0 28px;text-align:center}
+.lcard h2{color:var(--g);margin:0;padding:22px;font-size:24px;border-bottom:1px solid #dfe5de}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:12px;background:#fff;border:0;border-radius:999px;margin:26px 24px 20px;width:calc(100% - 48px);padding:16px;font-weight:600;font-size:17px}
+.gbtn:hover{box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.lcard small{display:block;color:var(--mut);padding:0 40px;font-size:14px}
+
+/* pages */
+.pg{padding:32px 40px 60px;max-width:1500px;margin:auto}
+.goals{background:var(--cream);min-height:calc(100vh - 110px);padding:0 40px 60px;position:relative;overflow:hidden}
+.goals h1{color:var(--g);font-size:clamp(28px,4.2vw,64px);text-align:center;margin:clamp(60px,18vh,200px) 0 18px;font-weight:800}
+.goals h3{text-align:center;color:var(--g);font-size:30px;margin:0 0 24px}
+.grid{display:grid;gap:24px;margin-bottom:24px}
+.g4,.g6{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+
+/* Metric summary cards. */
+.stat{background:#fff;border-left:6px solid var(--g);border-radius:12px;padding:20px;min-width:0;box-shadow:0 4px 14px rgba(0,0,0,.07);transition:.15s}
+.stat:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.stat span{display:block;color:#475569;font-weight:600;font-size:15px;line-height:1.3;white-space:normal}
+.stat b{display:block;color:var(--g);font-size:clamp(26px,2.8vw,40px);margin-top:10px}
+
+/* Shared page headings, containers, and form controls. */
+.h2{color:var(--g);font-size:36px;font-weight:800;margin:0 0 6px}.sub{color:var(--mut);margin:0 0 18px}
+.box{border:1px solid var(--line);border-radius:24px;padding:28px;background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.04)}
+.sel{border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 18px;color:var(--g);font-weight:700;font-size:16px}
+.chips{display:flex;gap:10px;margin:16px 0 20px}.chip{padding:8px 16px;border-radius:999px;font-weight:600;background:#ece9f8;color:#2e2a6e}.chip.w{background:#fdecec;color:#b42318}
+
+/* Trend cards and their color/status variants. */
+.tr{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.tc{border:1px solid var(--line);border-left:6px solid #2e2a6e;border-radius:16px;padding:22px;transition:.15s}.tc:hover{box-shadow:0 8px 20px rgba(0,0,0,.1)}
+.tc.bad{border-left-color:#b42318}.tc.bad .n{color:#b42318}.tc.wide{grid-column:span 2}
+.tc .hd{display:flex;justify-content:space-between;align-items:center;color:#475569;font-weight:600}
+.pill{background:#ece9f8;color:#2e2a6e;border-radius:999px;padding:5px 12px;font-size:14px;font-weight:700}.bad .pill{background:#fdecec;color:#b42318}
+.tc .n{font-size:44px;font-weight:800;color:#2e2a6e;margin:16px 0 8px}.tc .n i{font-style:normal;font-size:20px;font-weight:500;color:#9aa0b8}
+.tc p{margin:0;color:#64748b}
+.tc .hd{gap:12px;align-items:flex-start}
+.tc .hd > span:first-child{min-width:0;flex:1 1 auto}     /* the title is allowed to wrap */
+.pill{
+  flex:0 0 auto;            /* never shrink */
+  white-space:nowrap;       /* never break "+50%" into two lines */
+  min-width:64px;           /* same width for every pill */
+  text-align:center;
+  line-height:1;
+  padding:7px 12px;
+}
+
+/* Balance editors and compact inline actions used across financial cards. */
+.bal-in{width:130px;height:34px;border:1px solid var(--line);border-radius:8px;padding:0 10px;font:inherit}
+.linkbtn{background:none;border:0;color:var(--g);font-weight:700;font-size:12px;padding:0;margin-top:6px;cursor:pointer}
+.linkbtn:hover{text-decoration:underline}
+
+/* Five-column balance grid with tablet and mobile fallbacks. */
+.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media(max-width:1100px){.g5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.g5{grid-template-columns:minmax(0,1fr)}}
+
+/* Goal-page images and responsive placement. */
+.goals{padding-bottom:340px}               /* reserves room for the photos */
+.gp{position:absolute;object-fit:cover;border-radius:28px;box-shadow:0 8px 24px rgba(0,0,0,.18);transition:transform .3s}
+.gp-l{left:40px;bottom:40px;width:230px;height:260px}      /* smaller, lower */
+.gp-r{right:60px;bottom:100px;width:340px;height:230px}    /* larger, higher */
+.gp:hover{transform:scale(1.04) rotate(-1deg)}
+@media(max-width:900px){.gp{display:none}}
+.g6{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:700px){.g6{grid-template-columns:minmax(0,1fr)}}
+
+/* analytics */
+/* Section labels, tables, and ranks. */
+.sec{display:flex;align-items:center;gap:14px;margin:34px 0 14px}.sec:before{content:"";width:4px;height:30px;background:var(--g);border-radius:2px}
+.sec h2{margin:0;color:var(--g);font-size:28px}
+.tbl{width:100%;border-collapse:collapse}.tbl th{text-align:left;color:var(--g);font-weight:700;padding:14px 12px;border-bottom:1px solid var(--line);font-size:15px}
+.tbl td{padding:16px 12px;border-bottom:1px solid var(--line);font-size:16px;color:#374151}.tbl tbody tr:hover{background:#f6f9f6}
+.rank{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;font-weight:700;margin-right:16px}
+
+/* Analytics columns, horizontal scrolling, and chart legends. */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.scroll{overflow-x:auto}
+.more{display:block;margin:14px auto 0;background:none;border:0;color:#475569;font-size:17px}.more:hover{color:var(--g)}
+.leg{display:flex;gap:28px;font-weight:600;color:#374151;margin-bottom:12px;flex-wrap:wrap}.leg i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.bars{display:flex;align-items:flex-end;justify-content:space-around;height:240px;border:1px solid var(--line);border-radius:14px;padding:16px}
+.bg{display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end}.bg .pair{display:flex;gap:6px;align-items:flex-end;height:100%}
+.bar{width:36px;border-radius:3px 3px 0 0;position:relative;transition:.15s}.bar:hover{filter:brightness(1.15)}.bar em{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-style:normal;font-size:13px;font-weight:700}
+.bg small{color:#9ca3af}
+.foot{background:var(--g);color:#fff;padding:28px 40px;margin-top:30px}.foot a{color:#fff;word-break:break-all}
+/* HQ */
+/* HQ summary cards and financial content layout. */
+.fin{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-bottom:22px}
+.fcard{border-radius:12px;padding:16px 20px;box-shadow:0 3px 10px rgba(0,0,0,.12);background:#fff}.fcard span{color:#475569;font-weight:600;font-size:15px}.fcard b{display:block;color:var(--g);font-size:30px;margin-top:6px}
+.frm{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:22px}
+
+/* HQ event table, status chips, and pagination. */
+.evh{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.evh h3{margin:0;color:var(--g)}.evh p{margin:4px 0 20px;color:var(--mut)}
+.ev th{font-size:14px;color:#475569;padding:10px 8px}.ev td{padding:18px 8px;font-size:15px}.ev tbody tr{cursor:pointer}
+.st{display:inline-block;border-radius:999px;padding:7px 14px;font-weight:700;font-size:14px;color:#fff;background:var(--g)}.st.nc{background:#f8efe0;color:#a0522d;border:1px solid #ecd9b8}.st.ip{background:#2f5be0}
+.pgn{display:flex;justify-content:space-between;align-items:center;margin-top:16px;color:var(--mut);flex-wrap:wrap;gap:10px}.pgn div{display:flex;gap:10px;align-items:center}
+.pgn .btn{padding:10px 16px}.pgn .btn.on{background:var(--g);color:#fff;border-color:var(--g)}
+
+/* HQ yearly history chart and totals. */
+.hist{max-width:640px}.hbars{display:flex;align-items:flex-end;gap:12px;height:210px;border:1px solid var(--line);border-radius:16px;padding:20px 24px}
+.hbars div{flex:1;background:var(--g);border-radius:6px 6px 0 0;transition:.15s}.hbars div:hover{background:var(--gold)}
+.yrs{display:flex;gap:12px;padding:8px 24px;color:#6b7280}.yrs span{flex:1;text-align:center}
+.tot{display:flex;gap:60px;margin-top:20px}.tot span{color:#475569;font-weight:600}.tot b{display:block;font-size:30px}
+/* club log */
+/* Club Log controls and KPI cards. */
+.ctl{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px}.ctl .sel,.ctl .btn{height:48px;color:var(--ink);font-weight:600;font-size:14px;min-width:200px;text-align:left}
+.k4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:24px}
+.kc{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:#fff;transition:.15s}.kc:hover{box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.kp{display:inline-block;background:var(--g);color:#fff;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700}
+.kc b{display:block;color:var(--g);font-size:24px;margin:14px 0 8px}.kc p{margin:0;color:var(--mut);font-size:13px}
+
+/* Club Log tool buttons and searchable table controls. */
+.tools{display:flex;gap:10px;flex-wrap:wrap}.tools .btn{padding:8px 14px;font-size:13px;display:flex;gap:8px;align-items:center}.tools input{border:0;outline:0;font:inherit;font-size:13px;width:110px}
+.ev th span{color:#9ca3af;margin-left:2px}.ev small.sc{display:block;color:#ffffff;font-size:12px}
+.pd{color:#7a8a2a;font-weight:700}
+.cl2{display:grid;grid-template-columns:1fr 1.2fr;gap:30px;margin-top:24px;align-items:start}
+.score{background:var(--g);color:#fff;border-radius:12px;padding:18px 20px;margin:14px 0 20px}.score b{display:block;font-size:44px;margin:10px 0 6px}.score small{display:block;font-size:12px;margin-top:4px}
+.sub-r{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-top:14px}.sub-b{height:10px;border-radius:99px;margin-top:6px;transition:.2s}.sub-b:hover{filter:brightness(1.2)}
+.tipbox{margin-top:20px;border-left:3px solid var(--g);background:#f3f8f3;padding:10px 14px;color:#475569;font-size:13px}
+.chk{display:flex;gap:10px;align-items:flex-start;margin:10px 0;color:#374151;font-size:14px}.chk i{color:var(--g);font-style:normal}
+.addb{width:100%;margin-top:12px;background:var(--g);color:#fff;border:0;border-radius:8px;padding:12px;font-weight:700;letter-spacing:.05em}.addb:hover{background:var(--gd)}
+.sm3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.sm3 div{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px 14px}.sm3 span{font-size:13px;color:#475569;font-weight:600}.sm3 b{display:block;font-size:22px;color:var(--g)}
+.dot{transition:.15s;cursor:pointer}.dot:hover{fill:#d4b46e}
+@media(max-width:1100px){.k4{grid-template-columns:repeat(2,1fr)}.cl2{grid-template-columns:1fr}}
+@media(max-width:700px){.k4{grid-template-columns:1fr}.sm3{grid-template-columns:1fr}}
+/* add club */
+/* Breadcrumb and add-club form layout. */
+.bc{font-size:13px;color:#6b7280;margin-bottom:18px}.bc button{background:none;border:0;color:var(--g);padding:0;font-size:13px}.bc button:hover{text-decoration:underline}.bc i{margin:0 8px;font-style:normal}
+.ac{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px;align-items:start;margin-top:18px}
+.acc{border:1px solid var(--line);border-radius:10px;background:#fff}
+.acc .hd{display:flex;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line);font-size:13px;font-weight:700;color:var(--g)}.acc .hd small{color:#6b7280;font-weight:400}
+.acs{padding:20px;border-bottom:1px solid var(--line)}.acs h3{margin:0 0 4px;color:var(--g);font-size:17px}.acs>p{margin:0 0 18px;color:#6b7280;font-size:13px}
+.acs .fld{margin-bottom:18px}.acs .fld:last-child{margin-bottom:0}.acs .in{height:44px;margin-top:6px}.hint{font-size:12px;color:#6b7280;margin-top:6px}
+.dd{position:relative}.dd .in{cursor:pointer;justify-content:space-between;width:100%;font:inherit;text-align:left}.dd ul{position:absolute;z-index:20;left:0;right:0;margin:4px 0 0;padding:6px;list-style:none;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.dd li label{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:6px;font-weight:500;cursor:pointer;color:var(--ink)}.dd li label:hover{background:#f3f8f3}
+.note{display:flex;gap:10px;background:#f6f7f6;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-top:16px;font-size:12px;color:#475569}
+.acf{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;gap:12px;flex-wrap:wrap;font-size:12px;color:#6b7280}
+
+/* Add-club context sidebar. */
+.side{display:grid;gap:16px}.side .c{border:1px solid var(--line);border-radius:10px;padding:16px;background:#fff;font-size:12px;color:#475569;line-height:1.5}.side .c.g{background:#f3f6f1}
+.side h4{margin:0 0 8px;color:var(--g);font-size:14px}.side b{color:var(--ink)}.side ul{margin:0;padding-left:16px}
+@media(max-width:900px){.ac{grid-template-columns:1fr}}
+/* edit club */
+/* Edit-club form, back navigation, tags, and current-club summary. */
+.ec{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start;margin-top:22px}
+.ec .acc{border-radius:14px;margin-bottom:20px}.ec .acs{border:0;padding:22px 24px}.ec .acs h3{font-size:18px}
+.ec .in{height:48px}
+.back{display:flex;align-items:center;gap:10px;font-size:13px;color:#6b7280;margin-bottom:26px}.back button{background:none;border:0;color:var(--g);font-weight:700;padding:0;font-size:13px}.back button:hover{text-decoration:underline}
+.tag{border:1px solid #e8dcc0;background:#f8f3e6;color:var(--g);border-radius:10px;padding:8px 14px;font-weight:600;font-size:13px}
+.cur{background:#f8f6ee;border:1px solid #e8e3d0;border-radius:14px;padding:22px;margin-bottom:20px}.cur .top{display:flex;justify-content:space-between;align-items:center}.cur h3{margin:0;color:var(--g);font-size:18px}.cur .yr{background:#fff;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600;color:var(--g)}
+.cur h2{margin:22px 0 4px;color:var(--g);font-size:20px}.cur .dr{font-size:13px;color:#6b7280;margin-bottom:16px}
+.kv2{display:flex;justify-content:space-between;padding:7px 0;font-size:13px;color:#475569}.kv2 b{color:var(--ink)}
+.cur hr{border:0;border-top:1px solid #e0dcc8;margin:14px 0}.cur h4{margin:0 0 6px;color:var(--g);font-size:13px}
+.wb{background:#fff;border-radius:10px;padding:14px 16px;margin:12px 0}.wb small{display:block;color:#6b7280;font-size:12px}.wb b{display:block;color:var(--g);font-size:24px;margin:4px 0}
+.ecf{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:8px;padding-top:20px}.ecf b{display:block;font-size:13px}.ecf small{color:#6b7280;font-size:13px}
+@media(max-width:900px){.ec{grid-template-columns:1fr}}
+/* modal */
+/* Overlay, modal shell, header, and footer. */
+.ov{position:fixed;inset:0;background:rgba(40,55,42,.6);display:grid;place-items:center;padding:16px;z-index:50;overflow:auto}
+.md{background:#fbfaf7;border-radius:24px;width:min(1000px,100%);max-height:94vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.md.sm{width:min(920px,100%)}
+.mh{display:flex;justify-content:space-between;gap:12px;padding:28px 32px 18px;background:#fff;border-bottom:1px solid var(--line)}
+.mh h2{margin:0;color:var(--g);font-size:30px;font-weight:600;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.mh p{margin:6px 0 0;color:#475569}
+.x{border:1px solid var(--line);background:#fff;border-radius:10px;width:46px;height:46px;font-size:22px;color:#475569}.x:hover{background:#f3f4f6}
+.mb{padding:26px 32px;display:grid;gap:0}.mb.cols{grid-template-columns:1.6fr 1fr;gap:32px}
+.fs{padding:16px 0;border-bottom:1px solid var(--line)}.fs:last-child{border:0}
+.fs>div.t{display:flex;justify-content:space-between;color:var(--g);font-weight:600;margin-bottom:10px}.fs>div.t small{color:#6b7280;font-weight:400}
+.row{display:grid;gap:16px}.r2{grid-template-columns:1fr 1fr}.r3{grid-template-columns:repeat(3,1fr)}.r4{grid-template-columns:repeat(4,1fr)}
+label{display:block;font-weight:600;color:#475569;font-size:14px}
+.req{color:var(--red);margin-left:3px}
+/* Shared form field, focused-input, and modal-footer treatment. */
+.in{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:0 14px;height:56px;margin-top:8px;color:#9ca3af;transition:.15s}
+.in:focus-within{border-color:var(--g);box-shadow:0 0 0 3px rgba(61,102,64,.15)}
+.in input,.in select{flex:1;border:0;outline:0;background:none;font:inherit;font-size:16px;color:var(--ink);min-width:0;height:100%}
+.in.v{color:var(--ink);font-weight:500}.in.gold{background:#f8efd9;border-color:var(--gold)}
+.mf{display:flex;justify-content:space-between;align-items:center;padding:18px 32px;background:#fff;border-top:1px solid var(--line);gap:12px;flex-wrap:wrap}.mf small{color:#6b7280}.mf .dot{color:var(--gold)}
+
+/* Modal review, comments, and text area. */
+.rev{border:1px solid var(--line);border-radius:16px;padding:18px;background:#fff}.rev .kv{display:flex;justify-content:space-between;padding:8px 0;color:#475569}.rev .kv b{color:var(--ink)}
+.cm{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.av{width:36px;height:36px;border-radius:50%;background:#f8efd9;display:grid;place-items:center;font-size:12px;font-weight:700;color:#a0522d;flex:none}
+.ta{width:100%;min-height:110px;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;margin-top:8px;resize:vertical}
+@media(max-width:1100px){.tr{grid-template-columns:repeat(2,1fr)}.fin{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.mb.cols{grid-template-columns:1fr}}
+@media(max-width:700px){.login{grid-template-columns:1fr}.photos{display:none}.nav{padding:16px}.pg,.goals{padding-left:16px;padding-right:16px}.tr,.fin,.frm,.r2,.r3,.r4{grid-template-columns:1fr}.tc.wide{grid-column:auto}.tabs button{padding:10px 12px;font-size:14px}.mh,.mb,.mf{padding-left:18px;padding-right:18px}.tot{gap:24px}}
+
+/* Goal Edit */
+.goals .editb{position:absolute;top:20px;right:40px;z-index:2}
+.ge{max-width:900px;margin:0 auto}
+.ge .acs .in small{color:var(--mut);font-size:12px}
+.ge .in select{cursor:pointer}
+.ge-err{color:var(--red);font-size:13px;padding:0 20px}
+.btn:disabled{opacity:.6;cursor:default;transform:none}
+
+/* Shared minimum sizing and grid fallbacks prevent overflow in dense layouts. */
+.tr,.fin,.frm,.two,.k4,.sm3,.r2,.r3,.r4{min-width:0}
+.tr{grid-template-columns:repeat(4,minmax(0,1fr))}
+.fin{grid-template-columns:repeat(5,minmax(0,1fr))}
+.frm,.r2,.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.r3,.sm3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.r4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.k4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.cl2{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+.ctl .sel,.ctl .btn{min-width:min(200px,100%);flex:1 1 200px}
+.tools input{min-width:0;max-width:110px;width:100%}
+.stat,.kc,.fcard,.tc{min-width:0;overflow-wrap:word-break;word-break:break-word}
+svg{max-width:100%;height:auto}
+
+/* Responsive breakpoints for shared grid layouts. */
+@media(max-width:1100px){
+  .tr,.fin,.k4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .two,.cl2,.mb.cols{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:700px){
+  .tr,.fin,.frm,.r2,.r3,.r4,.k4,.sm3{grid-template-columns:minmax(0,1fr)}
+}
+
+/* User/logout menu */
+.user-wrap{position:relative}
+
+/* Signed-in user button and dropdown menu. */
+button.user{background:none;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:18px}
+button.user:hover{opacity:.85}
+.umenu{position:absolute;right:0;top:calc(100% + 10px);min-width:220px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,.18);padding:8px;z-index:80}
+.umenu-info{padding:10px 12px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.umenu-info b{display:block;color:var(--ink);font-size:14px;overflow-wrap:word-break;word-break:break-word}
+.umenu-info small{color:var(--mut);font-size:12px}
+.umenu button{width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:10px 12px;font-weight:600;font-size:14px;color:var(--red)}
+.umenu button:hover{background:#fdecec}
+
+/* responsive navigation: sizes follow the screen width */
+/* Main navigation, logo, and top-level tabs. */
+.nav{background:var(--g);display:flex;align-items:center;justify-content:space-between;padding:24px 40px;flex-wrap:wrap;gap:12px}
+.logo{display:flex;align-items:center;gap:14px;color:#fff;font-size:24px;font-weight:700}
+.logo img{height:70px;width:auto;display:block}
+.tabs{display:flex;gap:2px;border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:5px;background:rgba(255,255,255,.08);flex-wrap:wrap}
+.tabs button{background:none;border:0;color:#fff;font-weight:600;padding:12px 22px;border-radius:9px;font-size:16px}
+.tabs button:hover{background:rgba(255,255,255,.15)}
+.tabs button.on{background:var(--gold);color:var(--ink)}
+.user{display:flex;align-items:center;gap:14px;font-weight:600;font-size:18px;color:#fff}
+.user.admin{color:var(--gold)}.user svg{width:56px;height:56px}
+
+/* Navigation changes to stacked and horizontally scrollable layouts on small screens. */
+@media(max-width:1000px){
+  .nav{padding:14px 20px}
+  .tabs{order:3;width:100%;justify-content:center}
+}
+@media(max-width:700px){
+  .nav{padding:12px 16px}
+  .tabs{overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;-webkit-overflow-scrolling:touch}
+  .uname{display:none}
+}
+
+/* charts */
+/* Chart overflow, interactive points, and chart labels. */
+.bars{overflow-x:auto;gap:14px}
+.bars .bg{min-width:max-content}
+.hbars div{min-height:4px}
+.pt{cursor:pointer;transition:r .15s}
+.pt:focus-visible,.dot:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.pickcard{border:1px solid var(--line);background:#f8fafc;border-radius:10px;padding:12px 14px;font-size:13px;color:#475569}
+.pickcard b{color:var(--ink)}
+.pickcard small{display:block;margin-top:6px;color:var(--mut)}
+
+/* admin notes */
+/* Admin note actions, checklist rows, and note-entry controls. */
+.nbtn{background:none;border:0;color:var(--g);font-size:16px;line-height:1;padding:2px 6px;border-radius:6px}
+.nbtn:hover{background:#f3f8f3}
+.chk{align-items:center}
+.note-add{display:flex;gap:8px;margin-top:12px}
+.note-add input{flex:1;min-width:0;height:42px;border:1px solid var(--line);border-radius:8px;padding:0 12px;font:inherit;font-size:14px}
+.note-add input:focus{outline:0;border-color:var(--g);box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+
+/* demo mode */
+.demo-box{margin:0 24px 20px;padding-top:18px;border-top:1px solid #dfe5de}
+.demo-box p{margin:0 0 10px;font-size:13px;color:var(--mut)}
+.demo-btns{display:flex;gap:10px}
+.demo-btns .btn{flex:1;padding:12px 14px}
+.demo-banner{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:8px 40px;background:#fff3cd;color:#664d03;font-size:13px;font-weight:600}
+.demo-banner button{margin-left:6px;padding:4px 12px;border:1px solid #664d03;background:transparent;color:#664d03;border-radius:6px;font-weight:600}
+.demo-banner button.on{background:#664d03;color:#fff}
+@media(max-width:700px){.demo-banner{padding:8px 16px}}
