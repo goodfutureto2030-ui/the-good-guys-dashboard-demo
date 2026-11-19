@@ -1,4 +1,4 @@
-# the-good-guys-dashboard-demo
+# The Good Guys Dashboard Demo(the-good-guys-dashboard-demo)
 
 A demo of The Good Guys Dashboard, an internal management and analytics platform for a non-profit community organization. It tracks club events, volunteer activity, finances, and an impact score across multiple clubs.
 
@@ -6,7 +6,7 @@ A demo of The Good Guys Dashboard, an internal management and analytics platform
 
 > **This is a demo build.** It runs entirely in the browser on made-up sample data. It does not connect to a database, and nothing you change is saved (a refresh resets everything). The full application uses Supabase and Google sign-in, and its data is private.
 
-## Try it
+## How to try it 
 
 1. Open the live demo.
 2. On the login screen, click **Demo Admin** or **Demo User**. No account is needed.
